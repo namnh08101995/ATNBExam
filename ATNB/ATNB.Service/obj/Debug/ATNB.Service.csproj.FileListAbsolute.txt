@@ -1,0 +1,5 @@
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Service.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Service.pdb
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.csprojResolveAssemblyReference.cache
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.pdb
