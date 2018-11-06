@@ -3,3 +3,8 @@ C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\bin\Debug\ATNB.Model.
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\obj\Debug\ATNB.Model.csprojResolveAssemblyReference.cache
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\obj\Debug\ATNB.Model.dll
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\obj\Debug\ATNB.Model.pdb
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\bin\Debug\ATNB.Model.dll.config
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\bin\Debug\EntityFramework.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\bin\Debug\EntityFramework.xml
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Model\bin\Debug\EntityFramework.SqlServer.xml
