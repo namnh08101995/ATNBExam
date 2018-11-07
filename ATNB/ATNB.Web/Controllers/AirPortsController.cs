@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using ATNB.Model;
 using ATNB.Service.Abstractions;
+using System.Net;
 
 namespace ATNB.Web.Controllers
 {
@@ -18,6 +19,21 @@ namespace ATNB.Web.Controllers
         public ActionResult Index()
         {
             return View(_AirPortService.GetAll());
+        }
+
+        // GET: AirPorts/Details/5
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AirPort airPort = _AirPortService.GetById(id);
+            if (airPort == null)
+            {
+                return HttpNotFound();
+            }
+            return View(airPort);
         }
 
         // GET: AirPorts/Create

@@ -21,7 +21,7 @@ namespace ATNB.Model
 
         public double? MinNeededRunwaySize { get; set; }
         
-        [Display(Name = "AirPort")]
+        [Display(Name="AirPort")]
         public string AirPortId { get; set; }
 
         [ForeignKey("AirPortId")]

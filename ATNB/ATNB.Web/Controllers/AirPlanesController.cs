@@ -45,7 +45,7 @@ namespace ATNB.Web.Controllers
         // GET: AirPlanes/Create
         public ActionResult Create()
         {
-            ViewBag.AirPortId = new SelectList(_AirPlaneService.GetAll(), "Id", "Name");
+            ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace ATNB.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AirPortId = new SelectList(_AirPlaneService.GetAll(), "Id", "Name", airPlane.AirPortId);
+            ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name", airPlane.AirPortId);
             return View(airPlane);
         }
 
@@ -78,7 +78,7 @@ namespace ATNB.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AirPortId = new SelectList(_AirPlaneService.GetAll(), "Id", "Name", airPlane.AirPortId);
+            ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name", airPlane.AirPortId);
             return View(airPlane);
         }
 
@@ -94,7 +94,7 @@ namespace ATNB.Web.Controllers
                 _AirPlaneService.Update(airPlane);
                 return RedirectToAction("Index");
             }
-            ViewBag.AirPortId = new SelectList(_AirPlaneService.GetAll(), "Id", "Name", airPlane.AirPortId);
+            ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name", airPlane.AirPortId);
             return View(airPlane);
         }
 
