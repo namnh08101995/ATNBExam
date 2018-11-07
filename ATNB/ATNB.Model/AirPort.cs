@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATNB.Model
 {
@@ -14,10 +10,13 @@ namespace ATNB.Model
         [Display(Name = "AirPort Name")]
         public string Name { get; set; }
 
+        [Required]
         public double? RunwaySize { get; set; }
 
+        [Required]
         public int? MaxFWParkingPlace { get; set; }
 
+        [Required]
         public int? MaxRWParkingPlace { get; set; }
 
         public virtual IEnumerable<AirPlane> AirPlanes { get; set; }

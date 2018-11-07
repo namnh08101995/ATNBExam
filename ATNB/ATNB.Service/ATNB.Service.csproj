@@ -40,7 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IAirPlaneService.cs" />
+    <Compile Include="Abstractions\IAirPortService.cs" />
+    <Compile Include="Abstractions\IEntityService.cs" />
+    <Compile Include="Abstractions\IHelicopterService.cs" />
+    <Compile Include="Abstractions\IService.cs" />
+    <Compile Include="Abstractions\EntityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AirPlaneService.cs" />
+    <Compile Include="Services\AirPortService.cs" />
+    <Compile Include="Services\HelicopterService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATNB.Model\ATNB.Model.csproj">
+      <Project>{9b55ea30-1c1c-47b4-9948-ce32382350f0}</Project>
+      <Name>ATNB.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ATNB.Repository\ATNB.Repository.csproj">
+      <Project>{d76f04f1-e65c-44ea-b7d1-4f1db7c53b04}</Project>
+      <Name>ATNB.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
