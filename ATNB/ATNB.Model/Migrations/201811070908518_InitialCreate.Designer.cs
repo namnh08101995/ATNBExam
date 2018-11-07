@@ -13,7 +13,7 @@ namespace ATNB.Model.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201811070451299_InitialCreate"; }
+            get { return "201811070908518_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
