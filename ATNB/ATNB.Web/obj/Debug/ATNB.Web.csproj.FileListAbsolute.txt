@@ -61,3 +61,6 @@ C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\Autofac.xml
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\Autofac.Integration.Mvc.xml
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\EntityFramework.xml
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\EntityFramework.SqlServer.xml
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\LumenWorks.Framework.IO.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\LumenWorks.Framework.IO.pdb
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Web\bin\LumenWorks.Framework.IO.xml

@@ -17,6 +17,8 @@ namespace ATNB.Model
 
         public double? Range { get; set; }
 
+        public string FlyMethod = "rotated wing";
+
         [Display(Name = "AirPort")]
         public string AirPortId { get; set; }
 

@@ -55,11 +55,12 @@
     <Compile Include="Helicopter.cs" />
     <Compile Include="IAuditableEntity.cs" />
     <Compile Include="IEntity.cs" />
-    <Compile Include="Migrations\201811070908518_InitialCreate.cs" />
-    <Compile Include="Migrations\201811070908518_InitialCreate.Designer.cs">
-      <DependentUpon>201811070908518_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201811080941462_InitialCreate.cs" />
+    <Compile Include="Migrations\201811080941462_InitialCreate.Designer.cs">
+      <DependentUpon>201811080941462_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PlaneType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,8 +68,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811070908518_InitialCreate.resx">
-      <DependentUpon>201811070908518_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811080941462_InitialCreate.resx">
+      <DependentUpon>201811080941462_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

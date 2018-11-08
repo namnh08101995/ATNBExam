@@ -8,7 +8,6 @@ namespace ATNB.Model
         [ScaffoldColumn(false)]
         public DateTime CreatedDate { get; set; }
 
-
         [MaxLength(256)]
         [ScaffoldColumn(false)]
         public string CreatedBy { get; set; }

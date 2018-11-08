@@ -1,0 +1,50 @@
+﻿@model ATNB.Model.AirPort
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AirPort</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RunwaySize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RunwaySize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxFWParkingPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxFWParkingPlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxRWParkingPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxRWParkingPlace)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

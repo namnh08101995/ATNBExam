@@ -1,0 +1,67 @@
+﻿@model ATNB.Model.Helicopter
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Helicopter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AirPort.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirPort.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CruiseSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CruiseSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmptyWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmptyWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxTakeoffWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxTakeoffWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Range)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Range)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

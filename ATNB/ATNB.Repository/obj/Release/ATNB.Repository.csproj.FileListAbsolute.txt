@@ -1,0 +1,13 @@
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\ATNB.Repository.dll.config
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\ATNB.Repository.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\ATNB.Repository.pdb
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\ATNB.Model.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\EntityFramework.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\ATNB.Model.pdb
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\ATNB.Model.dll.config
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\EntityFramework.xml
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\obj\Release\ATNB.Repository.csprojResolveAssemblyReference.cache
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\obj\Release\ATNB.Repository.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Repository\obj\Release\ATNB.Repository.pdb

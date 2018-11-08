@@ -33,28 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AirPlaneType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.AirPlaneType, new { htmlAttributes = new { @class = "form-control" } })*@
-                @{
-                    List<SelectListItem> listItems = new List<SelectListItem>();
-                    listItems.Add(new SelectListItem
-                    {
-                        Text = "Exemplo1",
-                        Value = "a"
-                    });
-                    listItems.Add(new SelectListItem
-                    {
-                        Text = "Exemplo2",
-                        Value = "b",
-                        Selected = true
-                    });
-                    listItems.Add(new SelectListItem
-                    {
-                        Text = "Exemplo3",
-                        Value = "c"
-                    });
-                }
-
-                @Html.DropDownListFor(model => model.AirPlaneType, listItems, "-- Select Status --", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("AirPlaneType", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AirPlaneType, "", new { @class = "text-danger" })
             </div>
         </div>

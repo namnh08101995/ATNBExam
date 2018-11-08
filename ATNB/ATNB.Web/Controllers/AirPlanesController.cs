@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using ATNB.Model;
 using ATNB.Service.Abstractions;
 using System.Collections.Generic;
+using System;
 
 namespace ATNB.Web.Controllers
 {
@@ -10,29 +11,30 @@ namespace ATNB.Web.Controllers
     {
         IAirPlaneService _AirPlaneService;
         IAirPortService _AirPortService;
-        List<SelectListItem> listItems = new List<SelectListItem>();
+        IEnumerable<PlaneType> PlaneTypes;
 
         public AirPlanesController(IAirPlaneService AirPlaneService, IAirPortService AirPortService)
         {
             _AirPlaneService = AirPlaneService;
             _AirPortService = AirPortService;
-            
-            listItems.Add(new SelectListItem
+            PlaneTypes = new List<PlaneType>
             {
-                Text = "Exemplo1",
-                Value = "Exemplo1"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Exemplo2",
-                Value = "Exemplo2",
-                Selected = true
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Exemplo3",
-                Value = "Exemplo3"
-            });
+                new PlaneType
+                {
+                    TypeCode = "CAG",
+                    TypeName = "Cargo"
+                },
+                new PlaneType
+                {
+                    TypeCode = "LGR",
+                    TypeName = "Long range"
+                },
+                new PlaneType
+                {
+                    TypeCode = "PRV",
+                    TypeName = "Private"
+                }
+            };
         }
 
         // GET: AirPlanes
@@ -60,9 +62,7 @@ namespace ATNB.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name");
-            
-            ViewBag.AirPlaneType = listItems;
-
+            ViewBag.AirPlaneType = new SelectList(PlaneTypes, "TypeCode", "TypeName");
             return View();
         }
 

@@ -20,7 +20,9 @@ namespace ATNB.Model
         public double? MaxTakeoffWeight { get; set; }
 
         public double? MinNeededRunwaySize { get; set; }
-        
+
+        public string FlyMethod = "fixed wing";
+
         [Display(Name="AirPort")]
         public string AirPortId { get; set; }
 
