@@ -78,7 +78,7 @@ namespace ATNB.Web.Controllers
                 _AirPlaneService.Create(airPlane);
                 return RedirectToAction("Index");
             }
-
+            ViewBag.AirPlaneType = new SelectList(PlaneTypes, "TypeCode", "TypeName");
             ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name", airPlane.AirPortId);
             return View(airPlane);
         }

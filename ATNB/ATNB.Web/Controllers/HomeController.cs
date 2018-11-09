@@ -1,9 +1,5 @@
-﻿using LumenWorks.Framework.IO.Csv;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ATNB.Service.Abstractions;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,48 +7,71 @@ namespace ATNB.Web.Controllers
 {
     public class HomeController : Controller
     {
+        IAirPlaneService _AirPlaneService;
+        IAirPortService _AirPortService;
+
+        public HomeController(IAirPlaneService AirPlaneService, IAirPortService AirPortService)
+        {
+            _AirPlaneService = AirPlaneService;
+            _AirPortService = AirPortService;
+        }
+
         // GET: Home
         public ActionResult Index()
         {
             return View();
         }
 
-
-        public ActionResult Upload()
-        {
-            return View();
-        }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(HttpPostedFileBase upload)
+        public ActionResult Index(HttpPostedFileBase postedFile)
         {
-            if (ModelState.IsValid)
+            string filePath = string.Empty;
+            
+            if (postedFile == null || postedFile.ContentLength < 1)
             {
-                if (upload != null && upload.ContentLength > 0)
+                ModelState.AddModelError("File", "Please choose Your file");
+                return View();
+            }
+
+            if (postedFile.FileName.EndsWith(".csv"))
+            {
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
                 {
-                    if (upload.FileName.EndsWith(".csv"))
+                    Directory.CreateDirectory(path);
+                }
+
+                filePath = path + Path.GetFileName(postedFile.FileName);
+                string extension = Path.GetExtension(postedFile.FileName);
+                postedFile.SaveAs(filePath);
+
+                //Read the contents of CSV file.
+                string csvData = System.IO.File.ReadAllText(filePath);
+
+                //Execute a loop over the rows.
+                //FileService.Execute(csvData);
+                foreach (string row in csvData.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
                     {
-                        Stream stream = upload.InputStream;
-                        DataTable csvTable = new DataTable();
-                        using (CsvReader csvReader =
-                            new CsvReader(new StreamReader(stream), true))
+                        _AirPlaneService.Create(new Model.AirPlane
                         {
-                            csvTable.Load(csvReader);
-                        }
-                        return View(csvTable);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("File", "This file format is not supported");
-                        return View();
+                            Id = row.Split(',')[0],
+                            Model = row.Split(',')[1],
+                            AirPlaneType = row.Split(',')[2],
+                            CruiseSpeed = double.Parse(row.Split(',')[3]),
+                            EmptyWeight = double.Parse(row.Split(',')[4]),
+                            MaxTakeoffWeight = double.Parse(row.Split(',')[5]),
+                            MinNeededRunwaySize = double.Parse(row.Split(',')[6])
+                        });
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("File", "Please Upload Your file");
-                }
+            }
+            else
+            {
+                ModelState.AddModelError("File", "This file format is not supported");
+                return View();
             }
             return View();
         }

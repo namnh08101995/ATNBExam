@@ -1,11 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Upload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Upload File CSV</h2>
 
-<div class="form-group">
-    <label>File input</label>
-    <input type="file">
-</div>
+@using (Html.BeginForm("Index", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <input type="file" id="File" name="postedFile" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-default" />
+    </div>
+}
