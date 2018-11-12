@@ -27,7 +27,7 @@ namespace ATNB.Web.Controllers
         public ActionResult Index(HttpPostedFileBase postedFile)
         {
             string filePath = string.Empty;
-            
+
             if (postedFile == null || postedFile.ContentLength < 1)
             {
                 ModelState.AddModelError("File", "Please choose Your file");
@@ -50,23 +50,8 @@ namespace ATNB.Web.Controllers
                 string csvData = System.IO.File.ReadAllText(filePath);
 
                 //Execute a loop over the rows.
-                //FileService.Execute(csvData);
-                foreach (string row in csvData.Split('\n'))
-                {
-                    if (!string.IsNullOrEmpty(row))
-                    {
-                        _AirPlaneService.Create(new Model.AirPlane
-                        {
-                            Id = row.Split(',')[0],
-                            Model = row.Split(',')[1],
-                            AirPlaneType = row.Split(',')[2],
-                            CruiseSpeed = double.Parse(row.Split(',')[3]),
-                            EmptyWeight = double.Parse(row.Split(',')[4]),
-                            MaxTakeoffWeight = double.Parse(row.Split(',')[5]),
-                            MinNeededRunwaySize = double.Parse(row.Split(',')[6])
-                        });
-                    }
-                }
+                //Call method ExecuteFileCSV(csvData);
+                ExecuteFileCSV(csvData);
             }
             else
             {
@@ -74,6 +59,36 @@ namespace ATNB.Web.Controllers
                 return View();
             }
             return View();
+        }
+
+        public void ExecuteFileCSV(string csvData)
+        {
+
+
+            foreach (string row in csvData.Split('\n'))
+            {
+                SaveToDatabase(row);
+
+            }
+        }
+        public void SaveToDatabase(string row)
+        {
+            string id = "";
+            if (!string.IsNullOrEmpty(row))
+            {
+                id = row.Split(',')[0];
+
+                _AirPlaneService.Create(new Model.AirPlane
+                {
+                    Id = row.Split(',')[0],
+                    Model = row.Split(',')[1],
+                    AirPlaneType = row.Split(',')[2],
+                    CruiseSpeed = double.Parse(row.Split(',')[3]),
+                    EmptyWeight = double.Parse(row.Split(',')[4]),
+                    MaxTakeoffWeight = double.Parse(row.Split(',')[5]),
+                    MinNeededRunwaySize = double.Parse(row.Split(',')[6])
+                });
+            }
         }
     }
 }
