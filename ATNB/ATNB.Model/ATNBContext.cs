@@ -15,6 +15,7 @@ namespace ATNB.Model
         public DbSet<AirPlane> AirPlanes { get; set; }
         public DbSet<Helicopter> Helicopters { get; set; }
 
+
         public override int SaveChanges()
         {
             var modifiedEntries = ChangeTracker.Entries()
@@ -47,5 +48,6 @@ namespace ATNB.Model
 
             return base.SaveChanges();
         }
+
     }
 }
