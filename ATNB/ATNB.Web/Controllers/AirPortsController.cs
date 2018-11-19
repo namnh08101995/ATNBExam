@@ -23,6 +23,11 @@ namespace ATNB.Web.Controllers
             _HelicopterService = HelicopterService;
         }
 
+        public AirPortsController(IAirPortService AirPortService)
+        {
+            _AirPortService = AirPortService;
+        }
+
         // GET: AirPorts
         public ActionResult Index(string id)
         {
@@ -50,11 +55,30 @@ namespace ATNB.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AirPort airPort)
         {
-            // TODO: Add insert logic here
+            bool flag = false;
+            List<string> listId = new List<string>();
+            IEnumerable<AirPort> airPorts = _AirPortService.GetAll();
+            foreach(AirPort x in airPorts)
+            {
+                if (airPort.Id == x.Id)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                _AirPortService.Create(airPort);
-                return RedirectToAction("Index");
+                if(flag == true)
+                {
+                    ModelState.AddModelError("airportId", "ID is exist");
+                    return View(airPort);
+                }
+                else
+                {
+                    _AirPortService.Create(airPort);
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(airPort);

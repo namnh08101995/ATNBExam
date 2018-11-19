@@ -19,6 +19,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("airportId", new { @class = "text-danger" })
             </div>
         </div>
 
