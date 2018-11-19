@@ -1,15 +1,12 @@
-﻿@*@model IEnumerable<ATNB.Model.AirPort>*@
-
+﻿
 @model ATNB.Web.Models.AirPortIndexData
 
 @{
     ViewBag.Title = "AirPort Manager";
 }
 
-<h2>All AirPorts</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-primary", @style ="color:white;"})
 </p>
 
 <div class="row">
@@ -18,7 +15,6 @@
             <div class="panel-heading">
                 List AirPorts
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
                 <table width="100%" class="table" id="dataTables-example">
                     <thead>
@@ -57,20 +53,17 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Select", "Index", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                                    @Html.ActionLink("Export CSV", "Export", new { id = item.Id })
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
     </div>
-    <!-- /.col-lg-12 -->
 </div>
-<!-- /.row -->
 
 <div class="row">
     @if (Model.AirPlanes != null)
@@ -89,6 +82,7 @@
                                     <th>Id</th>
                                     <th>Model</th>
                                     <th>Airplane Type</th>
+                                    <th>Min Needed RunwaySize</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,8 +92,15 @@
                                         <td>@item.Id</td>
                                         <td>@item.Model</td>
                                         <td>@item.AirPlaneType</td>
+                                        <td>@item.MinNeededRunwaySize</td>
                                     </tr>
                                 }
+                                <tr>
+                                    <td colspan="4">
+                                        @Html.ActionLink("Add one or more AirPlane(s)", "AddAirPlane", new { id = ViewBag.AirPortID }) |
+                                        @Html.ActionLink("Remove one or more AirPlane(s)", "RemoveAirPlane", new { id = ViewBag.AirPortID })
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -107,7 +108,7 @@
             </div>
         </div>
     }
-    
+
     @if (Model.Helicopters != null)
     {
         <div class="col-lg-6">
@@ -137,7 +138,8 @@
                                 }
                                 <tr>
                                     <td colspan="3">
-                                        Add one or more Helicopter(s) | Remove one or more Helicopter(s)
+                                        @Html.ActionLink("Add one or more Helicopter(s)", "AddHelicopter", new { id = ViewBag.AirPortID }) |
+                                        @Html.ActionLink("Remove one or more Helicopter(s)", "RemoveHelicopter", new { id = ViewBag.AirPortID })
                                     </td>
                                 </tr>
                             </tbody>

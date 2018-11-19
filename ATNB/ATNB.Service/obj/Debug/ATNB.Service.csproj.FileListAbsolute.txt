@@ -1,8 +1,5 @@
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Service.dll
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Service.pdb
-C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.csprojResolveAssemblyReference.cache
-C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.dll
-C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.pdb
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Model.dll
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Repository.dll
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\EntityFramework.dll
@@ -11,3 +8,6 @@ C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Mode
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Repository.pdb
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\ATNB.Repository.dll.config
 C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\bin\Debug\EntityFramework.xml
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.csprojResolveAssemblyReference.cache
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.dll
+C:\Users\namnh74\Documents\GitHub\ATNBExam\ATNB\ATNB.Service\obj\Debug\ATNB.Service.pdb

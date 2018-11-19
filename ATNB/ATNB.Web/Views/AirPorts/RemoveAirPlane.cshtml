@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ATNB.Model.AirPlane>
+
+@{
+    ViewBag.Title = "RemoveAirPlane";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Remove AirPlane(s) from @ViewBag.AirPortId</h2>
+
+@using (Html.BeginForm("RemoveAirPlaneFromAirPort", "Airports"))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="airPortId" value="@ViewBag.AirPortId" />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    List AirPlanes
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Choose</th>
+                                    <th>Id</th>
+                                    <th>Model</th>
+                                    <th>AirPlane Type</th>
+                                    <th>Cruise Speed</th>
+                                    <th>Empty Weight</th>
+                                    <th>Max Takeoff Weight</th>
+                                    <th>Min Needed Runway Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="gradeA">
+                                        <td>
+                                            <input name="listIdCheck" type="checkbox" value="@item.Id">
+                                        </td>
+                                        <td>
+                                            @item.Id
+                                        </td>
+                                        <td>
+                                            @item.Model
+                                        </td>
+                                        <td>
+                                            @item.AirPlaneType
+                                        </td>
+                                        <td>
+                                            @item.CruiseSpeed
+                                        </td>
+                                        <td>
+                                            @item.EmptyWeight
+                                        </td>
+                                        <td>
+                                            @item.MaxTakeoffWeight
+                                        </td>
+                                        <td>
+                                            @item.MinNeededRunwaySize
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="8">
+                                        <input type="submit" value="Remove" class="btn btn-success" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

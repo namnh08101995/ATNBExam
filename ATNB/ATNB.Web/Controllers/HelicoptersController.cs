@@ -23,48 +23,10 @@ namespace ATNB.Web.Controllers
             return View(_HelicopterService.GetAll());
         }
 
-        // GET: Helicopters/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Helicopter helicopter = _HelicopterService.GetById(id);
-            if (helicopter == null)
-            {
-                return HttpNotFound();
-            }
-            return View(helicopter);
-        }
-
-        // GET: Helicopters/Create
-        public ActionResult Create()
-        {
-            ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name");
-            return View();
-        }
-
-        // POST: Helicopters/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Model,CruiseSpeed,EmptyWeight,MaxTakeoffWeight,Range,AirPortId")] Helicopter helicopter)
-        {
-            if (ModelState.IsValid)
-            {
-                _HelicopterService.Create(helicopter);
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name", helicopter.AirPortId);
-            return View(helicopter);
-        }
-
         // GET: Helicopters/Edit/5
         public ActionResult Edit(string id)
         {
+            ViewBag.AirPlaneId = id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,31 +54,6 @@ namespace ATNB.Web.Controllers
             }
             ViewBag.AirPortId = new SelectList(_AirPortService.GetAll(), "Id", "Name", helicopter.AirPortId);
             return View(helicopter);
-        }
-
-        // GET: Helicopters/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Helicopter helicopter = _HelicopterService.GetById(id);
-            if (helicopter == null)
-            {
-                return HttpNotFound();
-            }
-            return View(helicopter);
-        }
-
-        // POST: Helicopters/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Helicopter helicopter = _HelicopterService.GetById(id);
-            _HelicopterService.Delete(helicopter);
-            return RedirectToAction("Index");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Linq;
 using System.Collections.Generic;
 using ATNB.Web.Models;
+using System.IO;
 
 namespace ATNB.Web.Controllers
 {
@@ -22,11 +23,6 @@ namespace ATNB.Web.Controllers
             _HelicopterService = HelicopterService;
         }
 
-        //public ViewResult Index()
-        //{
-        //    return View(_AirPortService.GetAll());
-        //}
-
         // GET: AirPorts
         public ActionResult Index(string id)
         {
@@ -41,21 +37,6 @@ namespace ATNB.Web.Controllers
             }
 
             return View(viewModel);
-        }
-
-        // GET: AirPorts/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AirPort airPort = _AirPortService.GetById(id);
-            if (airPort == null)
-            {
-                return HttpNotFound();
-            }
-            return View(airPort);
         }
 
         // GET: AirPorts/Create
@@ -79,29 +60,6 @@ namespace ATNB.Web.Controllers
             return View(airPort);
         }
 
-        // GET: AirPorts/Edit/5
-        public ActionResult Edit(string id)
-        {
-            AirPort airPort = _AirPortService.GetById(id);
-            if (airPort == null)
-            {
-                return HttpNotFound();
-            }
-            return View(airPort);
-        }
-
-        // POST: AirPorts/Edit
-        [HttpPost]
-        public ActionResult Edit(AirPort airPort)
-        {
-            if (ModelState.IsValid)
-            {
-                _AirPortService.Update(airPort);
-                return RedirectToAction("Index");
-            }
-            return View(airPort);
-        }
-
         // GET: AirPorts/Delete/5
         public ActionResult Delete(string id)
         {
@@ -118,28 +76,210 @@ namespace ATNB.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(string id, FormCollection data)
         {
-            AirPort airPort = _AirPortService.GetById(id);
-
+            AirPort airport = _AirPortService.GetById(id);
             //Get all airplane with airportId = id
             IEnumerable<AirPlane> airplanes = _AirPlaneService.GetAll().Where(i => i.AirPortId == id);
 
             //Get all helicopter with airportId = id
             IEnumerable<Helicopter> helicopters = _HelicopterService.GetAll().Where(i => i.AirPortId == id);
 
-            //Remove relationship
-            //foreach(var airplane in airplanes)
-            //{
-            //    airplane.AirPortId = null;
-            //    _AirPlaneService.Update(airplane);
-            //}
-            //foreach (Helicopter helicopter in helicopters)
-            //{
-            //    helicopter.AirPortId = null;
-            //    _HelicopterService.Update(helicopter);
-            //}
+            List<string> listIdAirplane = new List<string>();
+            List<string> listIdHelicopter = new List<string>();
 
-            //_AirPortService.Delete(airPort);
+            //Remove relationship
+            foreach (AirPlane airplane in airplanes)
+            {
+                listIdAirplane.Add(airplane.Id);
+            }
+            foreach (Helicopter helicopter in helicopters)
+            {
+                listIdHelicopter.Add(helicopter.Id);
+            }
+
+            foreach (string i in listIdHelicopter)
+            {
+                //do some thing
+                Helicopter helicopter = _HelicopterService.GetById(i);
+                helicopter.AirPortId = null;
+                _HelicopterService.Update(helicopter);
+            }
+            foreach (string i in listIdAirplane)
+            {
+                //do some thing
+                AirPlane airplane = _AirPlaneService.GetById(i);
+                airplane.AirPortId = null;
+                _AirPlaneService.Update(airplane);
+            }
+
+            _AirPortService.Delete(airport);
             return RedirectToAction("Index");
         }
+
+        // GET: /AirPorts/AddHelicopter/5
+        public ActionResult AddHelicopter(string id)
+        {
+            ViewBag.AirPortId = id;
+            IEnumerable<Helicopter> helicopters = _HelicopterService.GetAll().Where(x => x.AirPortId == null);
+            if (helicopters == null)
+            {
+                return HttpNotFound();
+            }
+            return View(helicopters);
+        }
+
+        // POST: /AirPorts/AddHelicopter/5
+        public ActionResult AddHelicopterToAirPort(FormCollection frm)
+        {
+            var AirPortId = Request.Form["airPortId"];
+            string listId = Request.Form["listIdCheck"];
+            if (listId != null)
+            {
+                foreach(string id in listId.Split(','))
+                {
+                    //do some thing
+                    Helicopter helicopter = _HelicopterService.GetById(id);
+                    helicopter.AirPortId = AirPortId;
+                    _HelicopterService.Update(helicopter);
+                }
+            }
+            return RedirectToAction("Index",new { id=AirPortId });
+        }
+
+        // GET: /AirPorts/AddAirPlane/5
+        public ActionResult AddAirPlane(string id)
+        {
+            ViewBag.AirPortId = id;
+            double? runwaySize = _AirPortService.GetById(id).RunwaySize;
+            IEnumerable<AirPlane> airplanes = _AirPlaneService.GetAll().Where(x => x.AirPortId == null && x.MinNeededRunwaySize < runwaySize );
+            if (airplanes == null)
+            {
+                return HttpNotFound();
+            }
+            return View(airplanes);
+        }
+
+        // POST: /AirPorts/AddAirPlane/5
+        public ActionResult AddAirPlaneToAirPort(FormCollection frm)
+        {
+            var AirPortId = Request.Form["airPortId"];
+            string listId = Request.Form["listIdCheck"];
+            if (listId != null)
+            {
+                foreach (string id in listId.Split(','))
+                {
+                    //do some thing
+                    AirPlane airplane = _AirPlaneService.GetById(id);
+                    airplane.AirPortId = AirPortId;
+                    _AirPlaneService.Update(airplane);
+                }
+            }
+            return RedirectToAction("Index", new { id = AirPortId });
+        }
+
+        // GET: /AirPorts/RemoveAirPlane/5
+        public ActionResult RemoveAirPlane(string id)
+        {
+            ViewBag.AirPortId = id;
+            IEnumerable<AirPlane> airplanes = _AirPlaneService.GetAll().Where(x => x.AirPortId == id);
+            if (airplanes == null)
+            {
+                return HttpNotFound();
+            }
+            return View(airplanes);
+        }
+
+        // POST: /AirPorts/RemoveAirPlane/5
+        public ActionResult RemoveAirPlaneFromAirPort(FormCollection frm)
+        {
+            var AirPortId = Request.Form["airPortId"];
+            string listId = Request.Form["listIdCheck"];
+            if (listId != null)
+            {
+                foreach (string id in listId.Split(','))
+                {
+                    //do some thing
+                    AirPlane airplane = _AirPlaneService.GetById(id);
+                    airplane.AirPortId = null;
+                    _AirPlaneService.Update(airplane);
+                }
+            }
+            return RedirectToAction("Index", new { id = AirPortId });
+        }
+
+        // GET: /AirPorts/RemoveHelicopter/5
+        public ActionResult RemoveHelicopter(string id)
+        {
+            ViewBag.AirPortId = id;
+            IEnumerable<Helicopter> helicopters = _HelicopterService.GetAll().Where(x => x.AirPortId == id);
+            if (helicopters == null)
+            {
+                return HttpNotFound();
+            }
+            return View(helicopters);
+        }
+
+        // POST: /AirPorts/RemoveHelicopter/5
+        public ActionResult RemoveHelicopterFromAirPort(FormCollection frm)
+        {
+            var AirPortId = Request.Form["airPortId"];
+            string listId = Request.Form["listIdCheck"];
+            if (listId != null)
+            {
+                foreach (string id in listId.Split(','))
+                {
+                    //do some thing
+                    Helicopter helicopter = _HelicopterService.GetById(id);
+                    helicopter.AirPortId = null;
+                    _HelicopterService.Update(helicopter);
+                }
+            }
+            return RedirectToAction("Index", new { id = AirPortId });
+        }
+
+        //POST: /AirPorts/Export/5
+        public void Export(string id)
+        {
+            AirPort airPort = _AirPortService.GetById(id);
+            IEnumerable<AirPlane> airPlanes = _AirPlaneService.GetAll().Where(i => i.AirPortId == id);
+            IEnumerable<Helicopter> helicopters = _HelicopterService.GetAll().Where(i => i.AirPortId == id);
+
+            //Check an airPort is valid
+            int numOfAirPlane = 0;
+            int numOfHelicopter = 0;
+
+            foreach(var x in airPlanes)
+            {
+                numOfAirPlane++;
+            }
+            foreach (var x in airPlanes)
+            {
+                numOfHelicopter++;
+            }
+
+            if(numOfAirPlane >= 5 && numOfHelicopter >= 10)
+            {
+                StringWriter sw = new StringWriter();
+                Response.ClearContent();
+                Response.ContentType = "text/csv";
+
+                sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
+                    airPort.Id, airPort.Name, airPort.RunwaySize, airPort.MaxFWParkingPlace, airPort.MaxRWParkingPlace));
+
+                foreach(AirPlane airPlane in airPlanes)
+                {
+                    sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
+                        airPlane.Id,
+                        airPlane.Model,
+                        airPlane.AirPlaneType,
+                        airPlane.CruiseSpeed,
+                        airPlane.
+                        ));
+                }
+
+                Response.Write(sw.ToString());
+                Response.End();
+            }
+        }
+
     }
 }
