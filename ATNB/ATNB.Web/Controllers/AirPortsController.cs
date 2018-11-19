@@ -236,10 +236,11 @@ namespace ATNB.Web.Controllers
             return RedirectToAction("Index", new { id = AirPortId });
         }
 
-        //POST: /AirPorts/Export/5
-        public void Export(string id)
+        //Export file CSV
+        public void ExportCSV(string id)
         {
             AirPort airPort = _AirPortService.GetById(id);
+            //Get IEnumerable AirPlane and Helicopter
             IEnumerable<AirPlane> airPlanes = _AirPlaneService.GetAll().Where(i => i.AirPortId == id);
             IEnumerable<Helicopter> helicopters = _HelicopterService.GetAll().Where(i => i.AirPortId == id);
 
@@ -251,15 +252,17 @@ namespace ATNB.Web.Controllers
             {
                 numOfAirPlane++;
             }
-            foreach (var x in airPlanes)
+            foreach (var x in helicopters)
             {
                 numOfHelicopter++;
             }
 
+            //check airport isvalid.
             if(numOfAirPlane >= 5 && numOfHelicopter >= 10)
             {
                 StringWriter sw = new StringWriter();
                 Response.ClearContent();
+                Response.AddHeader("content-disposition", "attachment;filename=ExportAirport.csv");
                 Response.ContentType = "text/csv";
 
                 sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
@@ -267,12 +270,28 @@ namespace ATNB.Web.Controllers
 
                 foreach(AirPlane airPlane in airPlanes)
                 {
-                    sw.WriteLine(string.Format("{0},{1},{2},{3},{4}",
+                    sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7}",
                         airPlane.Id,
                         airPlane.Model,
                         airPlane.AirPlaneType,
                         airPlane.CruiseSpeed,
-                        airPlane.
+                        airPlane.EmptyWeight,
+                        airPlane.MaxTakeoffWeight,
+                        airPlane.MinNeededRunwaySize,
+                        airPlane.FlyMethod
+                        ));
+                }
+
+                foreach (Helicopter helicopter in helicopters)
+                {
+                    sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6}",
+                        helicopter.Id,
+                        helicopter.Model,
+                        helicopter.CruiseSpeed,
+                        helicopter.EmptyWeight,
+                        helicopter.MaxTakeoffWeight,
+                        helicopter.Range,
+                        helicopter.FlyMethod
                         ));
                 }
 
